@@ -41,5 +41,15 @@ pipeline {
         sh 'docker push 554716/newhealthcare:latest'
                      }
    }
+    stage ('Configure Test-server with Terraform'){
+      steps {
+        dir('deployments'){
+        sh 'sudo chmod 600 anji.pem'
+        sh 'terraform init'
+        sh 'terraform validate'
+        sh 'terraform apply --auto-approve'
+                }
+          }   
+       }
 }
 }
