@@ -36,6 +36,10 @@ pipeline {
                             }
                  }
     }
-
+    stage('Push Image to Docker Registry') {
+      steps {
+        sh 'docker push 554716/newhealthcare:latest'
+                     }
+   }
 }
 }
