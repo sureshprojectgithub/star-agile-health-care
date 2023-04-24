@@ -28,6 +28,14 @@ pipeline {
       steps {
         sh 'docker build -t 554716/newhealthcare:latest .'
                    }
-    }         
+    }
+    stage('Docker Login') {
+      steps { 
+      withCredentials([usernamePassword(credentialsId: 'docker-login', passwordVariable: 'DockerHubPassword', usernameVariable: 'DockerHubUser')]) {
+      sh "docker login -u ${env.DockerHubUser} -p ${env.DockerHubPassword}"
+                            }
+                 }
+    }
+
 }
 }
